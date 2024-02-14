@@ -1,6 +1,7 @@
 import React from "react";
 
 interface UserCardProps {
+  key: number;
   userName: string;
   userImageURL: string;
 }
