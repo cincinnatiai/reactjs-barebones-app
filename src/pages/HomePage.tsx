@@ -3,20 +3,18 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import loading from "../assets/loading.gif";
 
-import { fetchRandomDogImageAsync } from "../api/dogsApi/dogsApi";
+import { Photo, fetchPhotosResponse } from "../api/dogsApi/photosApi";
+import { PhotoGallery } from "../components/PhotoGallery";
+import { useDispatch, useSelector } from "react-redux";
+import { getPhotosFetch } from "../app/actions/actionCreators";
+import { selectIsLoading, selectPhotos } from "../app/selectors";
 
 const HomePage: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const dispatch = useDispatch();
+  const photos = useSelector(selectPhotos);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    const getImageUrl = async (): Promise<void> => {
-      setIsLoading(true);
-      const url: string = await fetchRandomDogImageAsync();
-      setImageUrl(url);
-      setIsLoading(false);
-    };
-    getImageUrl();
+    dispatch(getPhotosFetch());
   }, []);
 
   return (
@@ -24,11 +22,10 @@ const HomePage: React.FC = () => {
       <Header />
       <main>
         <div className="container">
-          <p>Look at this beauty!</p>
           {isLoading ? (
             <img className="spinner" src={loading} alt="loading spinner" />
           ) : (
-            <img className="dog-image" src={imageUrl} alt="Dog image" />
+            <PhotoGallery photos={photos} />
           )}
         </div>
       </main>
