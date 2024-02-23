@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import {ActionType} from "../actions/index";
-import { Photo, fetchPhotosResponse } from "../../api/dogsApi/photosApi";
+import {ActionType} from "../actions/actions";
+import { Photo, fetchPhotosResponse } from "../../api/photosApi/photosApi";
 import { getPhotosFailure, getPhotosSuccess } from "../actions/actionCreators";
 
 function* workGetPhotos() {

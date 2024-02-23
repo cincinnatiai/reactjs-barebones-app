@@ -1,4 +1,4 @@
-import { GetPhotosFetch, GetPhotosFailure, GetPhotosSuccess, ActionType } from "../actions";
+import { GetPhotosFetch, GetPhotosFailure, GetPhotosSuccess, ActionType } from "../actions/actions";
 
 type PhotosActions = (GetPhotosFetch | GetPhotosSuccess | GetPhotosFailure); 
 

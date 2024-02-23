@@ -1,4 +1,4 @@
-import { ActionType } from ".";
+import { ActionType } from "./actions";
 
 export const getPhotosFetch = () => ({
     type: ActionType.GET_PHOTOS

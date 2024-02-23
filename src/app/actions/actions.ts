@@ -1,4 +1,4 @@
-import { Photo } from "../../api/dogsApi/photosApi"
+import { Photo } from "../../api/photosApi/photosApi"
 
 export enum ActionType {
     GET_PHOTOS = "GET_PHOTOS",

@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import photoReducer from "./photoReducer";
+import photoReducer from "./photosReducer";
 
 const reducer = combineReducers({
     photos: photoReducer

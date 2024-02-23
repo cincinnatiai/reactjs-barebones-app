@@ -1,4 +1,4 @@
-import { PhotoState } from "../reducers";
+import { PhotoState } from "../reducers/combineReducers";
 
 const photosSelector = (state: PhotoState) => state.photos;
 

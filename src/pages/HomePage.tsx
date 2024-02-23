@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
 import loading from "../assets/loading.gif";
 
-import { Photo, fetchPhotosResponse } from "../api/dogsApi/photosApi";
 import { PhotoGallery } from "../components/PhotoGallery";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhotosFetch } from "../app/actions/actionCreators";
-import { selectIsLoading, selectPhotos } from "../app/selectors";
+import { selectIsLoading, selectPhotos } from "../app/selectors/photosSelector";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const HomePage: React.FC = () => {
   const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
     dispatch(getPhotosFetch());
-  }, []);
+  });
 
   return (
     <div className="home-page">

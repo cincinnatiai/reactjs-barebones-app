@@ -1,3 +1,4 @@
+import { Photo } from "../api/photosApi/photosApi";
 export const PhotoGallery = ({ photos }) => {
   return (
     <div

@@ -3,7 +3,6 @@ import axios from "axios";
 const PHOTOS_ENDPOINT = "https://api.unsplash.com/photos";
 
 const apiKey = import.meta.env.VITE_UNSPLASH_API_KEY;
-console.log(apiKey)
 
 const config = {
     params: {
@@ -24,7 +23,6 @@ export type Photo = {
 export const fetchPhotosResponse = async(): Promise<Photo[]> => {
     try {
         const response = await axios.get(PHOTOS_ENDPOINT, config);
-        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error("Error fetching photos", error);
