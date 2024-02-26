@@ -1,10 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import photoReducer from "./photosReducer";
-
+import filmReducer from "./filmsReducer";
+import filmDetailsReducer from "./filmDetailsReducer";
 const reducer = combineReducers({
-    photos: photoReducer
+    films: filmReducer,
+    filmDetails: filmDetailsReducer
 })
 
 export default reducer;
 
-export type PhotoState = ReturnType<typeof reducer>;
+export type FilmsState = ReturnType<typeof reducer>;

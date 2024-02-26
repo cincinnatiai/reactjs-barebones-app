@@ -1,8 +1,10 @@
 import React from "react";
+import ActionButton from "./ActionButton";
 
 const Header: React.FC = () => (
   <header className="header">
-    <h1>Fetching 10 Images from Unsplash</h1>
+    <h1>Studio Ghibli Films</h1>
+    <ActionButton />
   </header>
 );
 

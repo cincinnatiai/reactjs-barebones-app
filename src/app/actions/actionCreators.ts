@@ -1,13 +1,28 @@
+import { Film } from "../../api/ghibliApi/ghibliApi";
 import { ActionType } from "./actions";
 
-export const getPhotosFetch = () => ({
-    type: ActionType.GET_PHOTOS
+export const getFilmsFetch = () => ({
+    type: ActionType.GET_FILMS
 })
-export const getPhotosSuccess = (photos) => ({
-    type: ActionType.GET_PHOTOS_SUCCESS, 
-    payload: photos
+export const getFilmsSuccess = (films : Film[]) => ({
+    type: ActionType.GET_FILMS_SUCCESS, 
+    payload: films
 })
-export const getPhotosFailure = (error) => ({
-    type: ActionType.GET_PHOTOS_FAILURE,
+export const getFilmsFailure = (error: string) => ({
+    type: ActionType.GET_FILMS_FAILURE,
     payload: error
 })
+
+export const getFilmDetail = () => ({
+  type: ActionType.GET_FILM_DETAILS,
+});
+
+export const getFilmDetailSuccess = (filmImageUrl: string) => ({
+  type: ActionType.GET_FILM_DETAILS_SUCCESS,
+  payload: filmImageUrl,
+});
+
+export const getFilmDetailFailure = (error: string) => ({
+  type: ActionType.GET_FILM_DETAILS_FAILURE,
+  payload: error,
+});
