@@ -1,24 +1,35 @@
-import React, { useEffect } from "react";
-import { fetchFilmDetailsStart } from "../app/slices/filmDetailsSlice";
 import { Film } from "../api/ghibliApi/ghibliApi";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 const FilmCard = ({ film }: { film: Film }): React.JSX.Element => {
-  const dispatch = useAppDispatch();
-  const filmDetails = useAppSelector(
-    (state) => state.filmDetailsSlice.filmDetails?.image
-  );
+  const truncate = (
+    text: string,
+    maxLength: number,
+    ellipsis: string = "..."
+  ): string => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength - ellipsis.length) + ellipsis;
+  };
 
-  useEffect(() => {
-    dispatch(fetchFilmDetailsStart());
-  });
+  const filmDescription = truncate(film.description, 428);
 
   return (
-    <div className="card">
-      <h1>{film.title}</h1>
-      <p>{film.description}</p>
-      <img src={filmDetails} alt={film.title} />;
-    </div>
+    <>
+      <div className="card">
+        <div className="card-image">
+          <img
+            src={film.image}
+            alt={film.title}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
+        <div className="card-description">
+          <h1>{film.title}</h1>
+          <p>{filmDescription}</p>
+        </div>
+      </div>
+    </>
   );
 };
 

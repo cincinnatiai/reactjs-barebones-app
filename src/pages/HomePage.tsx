@@ -5,9 +5,9 @@ import spinner from "../assets/loading.gif";
 import FilmList from "../components/FilmList";
 import { useAppSelector } from "../hooks/hooks";
 
-const HomePage: React.FC = () => {
+const HomePage = (): React.JSX.Element => {
   const films = useAppSelector((state) => state.filmsSlice.films) || [];
-  const loading = useAppSelector((state) => state.filmsSlice.loading);
+  const isLoading = useAppSelector((state) => state.filmsSlice.isLoading);
 
   let content;
 
@@ -17,10 +17,11 @@ const HomePage: React.FC = () => {
         <img
           src="https:www.ghibli.jp/gallery/chihiro039.jpg"
           alt="Chihiro Movie"
+          width={"90%"}
         />
       </div>
     );
-  } else if (loading) {
+  } else if (isLoading) {
     content = <img className="spinner" src={spinner} alt="loading spinner" />;
   } else {
     content = <FilmList />;

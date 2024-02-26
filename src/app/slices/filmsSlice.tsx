@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Film } from "../../api/ghibliApi/ghibliApi";
 
 interface FilmsState {
-  loading: boolean;
+  isLoading: boolean;
   films: Film[];
   error: string;
 }
 
 const initialState: FilmsState = {
-  loading: false,
+  isLoading: false,
   films: [],
   error: "",
 };
@@ -18,22 +18,22 @@ export const filmsSlice = createSlice({
   initialState,
   reducers: {
     fetchFilmsStart: (state) => {
-      state.loading = true;
+      state.isLoading = true;
     },
     fetchFilmsSuccess: (state, action: PayloadAction<Film[]>) => {
-      state.loading = false;
+      state.isLoading = false;
       state.films = action.payload;
       state.error = "";
     },
     fetchFilmsFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
+      state.isLoading = false;
       state.films = [];
       state.error = action.payload;
     },
   },
   selectors: {
     selectFilms: (films) => films.films,
-    selectLoading: (films) => films.loading,
+    selectLoading: (films) => films.isLoading,
   },
 });
 

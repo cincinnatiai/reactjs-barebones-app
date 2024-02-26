@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage";
 import { Provider } from "react-redux";
 import store from "./app/store";
 
-const App: React.FC = () => (
+const App = (): React.JSX.Element => (
   <Provider store={store}>
     <div className="App">
       <HomePage />
