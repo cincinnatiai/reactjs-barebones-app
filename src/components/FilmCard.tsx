@@ -1,27 +1,23 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchFilmDetailsStart } from "../app/reducers/filmDetailsSlice";
+import { fetchFilmDetailsStart } from "../app/slices/filmDetailsSlice";
 import { Film } from "../api/ghibliApi/ghibliApi";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 const FilmCard = ({ film }: { film: Film }): React.JSX.Element => {
-  const dispatch = useDispatch();
-  const filmDetails = useSelector((state: any) => state.filmDetails.film);
+  const dispatch = useAppDispatch();
+  const filmDetails = useAppSelector(
+    (state) => state.filmDetailsSlice.filmDetails?.image
+  );
 
   useEffect(() => {
     dispatch(fetchFilmDetailsStart());
-  }, [dispatch]);
-
-  if (!filmDetails) {
-    return <div>Loading...</div>;
-  }
+  });
 
   return (
     <div className="card">
-      <h1>{filmDetails.title}</h1>
-      <p>{filmDetails.description}</p>
-      {filmDetails.image && (
-        <img src={filmDetails.image} alt={filmDetails.title} />
-      )}
+      <h1>{film.title}</h1>
+      <p>{film.description}</p>
+      <img src={filmDetails} alt={film.title} />;
     </div>
   );
 };

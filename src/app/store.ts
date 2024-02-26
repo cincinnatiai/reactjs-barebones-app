@@ -1,15 +1,27 @@
 import createSagaMiddleware from "@redux-saga/core";
-import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./reducers/combineReducers";
+import filmsSlice from "./slices/filmsSlice";
+import filmDetailsSlice from "./slices/filmDetailsSlice";
 import filmsSaga from "./sagas/filmsSaga";
+import { combineSlices, configureStore } from "@reduxjs/toolkit"
+import filmDetailsSaga from "./sagas/filmDetailsSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
+const rootReducer = combineSlices({filmsSlice, filmDetailsSlice})
+
+export type RootState = ReturnType<typeof rootReducer>
+
 const store = configureStore({
-    reducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(sagaMiddleware)
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware => {
+        return getDefaultMiddleware().concat(sagaMiddleware)
+    }
 });
 
-sagaMiddleware.run(filmsSaga);
-
 export default store;
+
+sagaMiddleware.run(filmsSaga);
+sagaMiddleware.run(filmDetailsSaga);
+
+export type AppStore = typeof store
+export type AppDispatch = AppStore["dispatch"]

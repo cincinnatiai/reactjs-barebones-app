@@ -1,19 +1,18 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import {ActionType} from "../actions/actions";
-import { FilmDetails, fetchFilmDetailsResponse } from "../../api/ghibliApi/ghibliApi";
-import { getFilmsFailure, getFilmsSuccess } from "../actions/actionCreators";
+import { fetchFilmDetailsStart, fetchFilmDetailsSuccess, fetchFilmDetailsFailure } from "../slices/filmDetailsSlice";
+import { fetchFilmDetailsResponse } from "../../api/ghibliApi/ghibliApi";
 
-function* workGetFilmDetails() {
+function* workGetFilmDetails(action) {
     try {
-        const filmDetails: FilmDetails = yield call(fetchFilmDetailsResponse());
-        yield put(getFilmsSuccess(filmDetails))
+        const filmDetails = yield call(fetchFilmDetailsResponse, action.payload);
+        yield put(fetchFilmDetailsSuccess(filmDetails));
     } catch (error) {
-        yield put(getFilmsFailure(error))
+        yield put(fetchFilmDetailsFailure(error.message));
     }
 }
 
-function* filmsSaga() {
-    yield takeEvery(ActionType.GET_FILM_DETAILS, workGetFilmDetails)
+function* filmDetailsSaga() {
+    yield takeEvery(fetchFilmDetailsStart.type, workGetFilmDetails);
 }
 
-export default filmsSaga;
+export default filmDetailsSaga;

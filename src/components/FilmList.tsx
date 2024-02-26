@@ -1,21 +1,9 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchFilmsStart } from "../app/reducers/filmsSlice";
+import React from "react";
 import FilmCard from "./FilmCard";
+import { useAppSelector } from "../hooks/hooks";
 
 const FilmList = (): React.JSX.Element => {
-  const dispatch = useDispatch();
-  const films = useSelector((state: any) => state.films.films);
-  const loading = useSelector((state: any) => state.films.loading);
-
-  useEffect(() => {
-    dispatch(fetchFilmsStart());
-  }, [dispatch]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+  const films = useAppSelector((state) => state.filmsSlice.films);
   return (
     <>
       {films.map((film) => (

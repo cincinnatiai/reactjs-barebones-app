@@ -1,11 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { getFilmsFetch } from "../app/actions/actionCreators";
+import { useAppDispatch } from "../hooks/hooks";
+import { fetchFilmsStart } from "../app/slices/filmsSlice";
 
 const ActionButton = (): React.JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleClick = () => {
-    dispatch(getFilmsFetch());
+    dispatch(fetchFilmsStart());
   };
   return <button onClick={handleClick}>Get Films</button>;
 };

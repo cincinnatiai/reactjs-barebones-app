@@ -31,9 +31,15 @@ export const filmsSlice = createSlice({
       state.error = action.payload;
     },
   },
+  selectors: {
+    selectFilms: (films) => films.films,
+    selectLoading: (films) => films.loading,
+  },
 });
 
 export const { fetchFilmsStart, fetchFilmsSuccess, fetchFilmsFailure } =
   filmsSlice.actions;
+
+export const { selectFilms, selectLoading } = filmsSlice.selectors;
 
 export default filmsSlice.reducer;

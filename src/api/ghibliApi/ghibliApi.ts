@@ -6,16 +6,13 @@ export type Film = {
     id: string,
     title: string,
     description: string,
-    url: string,
-};
-
-export type FilmDetails = {
-    image: string
+    image:string,
 };
 
 export const fetchFilmsResponse = async(): Promise<Film[]> => {
     try {
         const response = await axios.get(GHIBLI_FILMS_ENDPOINT);
+        console.log(response)
         return response.data;
     } catch (error) {
         console.error("Error fetching films", error);

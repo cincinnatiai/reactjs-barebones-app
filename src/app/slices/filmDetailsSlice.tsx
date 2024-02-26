@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Film } from "../../api/ghibliApi/ghibliApi";
+import { FilmDetails } from "../../api/ghibliApi/ghibliApi";
 
 interface FilmDetailsState {
   loading: boolean;
-  film: Film | null;
+  filmDetails: FilmDetails | null;
   error: string;
 }
 
 const initialState: FilmDetailsState = {
   loading: false,
-  film: null,
+  filmDetails: null,
   error: "",
 };
 
@@ -20,16 +20,19 @@ export const filmDetailsSlice = createSlice({
     fetchFilmDetailsStart: (state) => {
       state.loading = true;
     },
-    fetchFilmDetailsSuccess: (state, action: PayloadAction<Film>) => {
+    fetchFilmDetailsSuccess: (state, action: PayloadAction<FilmDetails>) => {
       state.loading = false;
-      state.film = action.payload;
+      state.filmDetails = action.payload;
       state.error = "";
     },
     fetchFilmDetailsFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
-      state.film = null;
+      state.filmDetails = null;
       state.error = action.payload;
     },
+  },
+  selectors: {
+    selectImage: (filmDetails) => filmDetails.filmDetails,
   },
 });
 
@@ -38,5 +41,7 @@ export const {
   fetchFilmDetailsSuccess,
   fetchFilmDetailsFailure,
 } = filmDetailsSlice.actions;
+
+export const { selectImage } = filmDetailsSlice.selectors;
 
 export default filmDetailsSlice.reducer;
