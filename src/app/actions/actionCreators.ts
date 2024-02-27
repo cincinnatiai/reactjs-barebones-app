@@ -1,13 +1,13 @@
+import Film from "../../model/FilmsResponse";
 import { ActionType } from "./actions";
 
-export const getPhotosFetch = () => ({
-    type: ActionType.GET_PHOTOS
+export const getFilms = () => ({
+    type: ActionType.GET_FILMS
 })
-export const getPhotosSuccess = (photos) => ({
-    type: ActionType.GET_PHOTOS_SUCCESS, 
-    payload: photos
+export const getFilmsSuccess = (films: Film[]) => ({
+    type: ActionType.GET_FILMS_SUCCESS, 
+    payload: films
 })
-export const getPhotosFailure = (error) => ({
-    type: ActionType.GET_PHOTOS_FAILURE,
-    payload: error
+export const getFilmsFailure = () => ({
+    type: ActionType.GET_FILMS_FAILURE,
 })

@@ -1,34 +1,38 @@
-import React, { useEffect } from "react";
-
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import spinner from "../assets/loading.gif";
+import FilmList from "../components/FilmList";
+import { useSelector } from "react-redux";
+import { selectFilms, selectIsLoading } from "../app/selectors/filmsSelector";
 
-import loading from "../assets/loading.gif";
-
-import { PhotoGallery } from "../components/PhotoGallery";
-import { useDispatch, useSelector } from "react-redux";
-import { getPhotosFetch } from "../app/actions/actionCreators";
-import { selectIsLoading, selectPhotos } from "../app/selectors/photosSelector";
-
-const HomePage: React.FC = () => {
-  const dispatch = useDispatch();
-  const photos = useSelector(selectPhotos);
+const HomePage = (): React.JSX.Element => {
+  const films = useSelector(selectFilms);
   const isLoading = useSelector(selectIsLoading);
-  useEffect(() => {
-    dispatch(getPhotosFetch());
-  });
+
+  let content;
+
+  if (!films || films.length === 0) {
+    content = (
+      <div className="image-container">
+        <img
+          src="https:www.ghibli.jp/gallery/chihiro039.jpg"
+          alt="Chihiro Movie"
+          width={"90%"}
+        />
+      </div>
+    );
+  } else if (isLoading) {
+    content = <img className="spinner" src={spinner} alt="loading spinner" />;
+  } else {
+    content = <FilmList />;
+  }
 
   return (
     <div className="home-page">
       <Header />
       <main>
-        <div className="container">
-          {isLoading ? (
-            <img className="spinner" src={loading} alt="loading spinner" />
-          ) : (
-            <PhotoGallery photos={photos} />
-          )}
-        </div>
+        <div className="container">{content}</div>
       </main>
       <Footer />
     </div>
